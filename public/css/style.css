@@ -1,0 +1,107 @@
+/* ---- Reset & Base ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #app { width: 100%; height: 100%; overflow: hidden; font-family: 'Segoe UI', Arial, sans-serif; }
+
+/* ---- Layout ---- */
+#app { display: flex; flex-direction: column; background: #12141c; }
+#toolbar { display: flex; align-items: center; height: 48px; background: #1a1d2e; border-bottom: 1px solid #2a2d45; padding: 0 12px; gap: 8px; flex-shrink: 0; z-index: 1000; }
+#main { display: flex; flex: 1; overflow: hidden; }
+#sidebar { width: 260px; background: #1a1d2e; border-right: 1px solid #2a2d45; overflow-y: auto; flex-shrink: 0; display: flex; flex-direction: column; gap: 0; }
+#map-wrapper { flex: 1; position: relative; }
+#map { width: 100%; height: 100%; }
+
+/* ---- Toolbar ---- */
+.toolbar-brand { font-size: 14px; font-weight: 700; color: #fff; white-space: nowrap; margin-right: 8px; }
+.toolbar-tools { display: flex; align-items: center; gap: 4px; }
+.tool-btn { display: flex; align-items: center; gap: 5px; padding: 5px 10px; background: transparent; border: 1px solid transparent; border-radius: 6px; color: #adb5d0; cursor: pointer; font-size: 12px; transition: all 0.15s; white-space: nowrap; }
+.tool-btn:hover { background: #2a2d45; color: #fff; border-color: #3a3d5a; }
+.tool-btn.active { background: #3a4080; color: #fff; border-color: #5865f2; }
+.tool-btn.danger:hover { background: #5a1a1a; color: #ff6b6b; border-color: #8b2020; }
+.tool-icon { font-size: 14px; }
+.toolbar-separator { width: 1px; height: 28px; background: #2a2d45; margin: 0 4px; }
+
+/* ---- Sidebar ---- */
+.sidebar-section { padding: 14px 12px; border-bottom: 1px solid #2a2d45; }
+.sidebar-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #6b7299; margin-bottom: 10px; }
+
+/* ---- Construction Cards ---- */
+.construction-card { display: flex; align-items: center; gap: 10px; padding: 10px 10px; border-radius: 8px; cursor: pointer; border: 1px solid transparent; transition: all 0.15s; margin-bottom: 4px; }
+.construction-card:hover { background: #252840; border-color: #3a3d5a; }
+.construction-card.active { background: #2a3060; border-color: #5865f2; }
+.card-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.card-info { flex: 1; min-width: 0; }
+.card-name { font-size: 13px; font-weight: 600; color: #dcddde; }
+.card-desc { font-size: 11px; color: #6b7299; margin-top: 2px; }
+
+/* ---- Properties Panel ---- */
+.prop-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.prop-row label { font-size: 12px; color: #8b91b0; }
+.prop-input { background: #12141c; border: 1px solid #2a2d45; border-radius: 5px; color: #dcddde; padding: 5px 8px; font-size: 12px; width: 140px; outline: none; }
+.prop-input:focus { border-color: #5865f2; }
+.prop-color { width: 50px; height: 28px; border: none; background: none; cursor: pointer; border-radius: 5px; padding: 0; }
+.prop-value { font-size: 12px; color: #dcddde; }
+.btn-danger { width: 100%; padding: 8px; background: #3a1515; border: 1px solid #6a2020; border-radius: 6px; color: #ff6b6b; cursor: pointer; font-size: 12px; margin-top: 6px; transition: all 0.15s; }
+.btn-danger:hover { background: #5a1515; }
+
+/* ---- Stats ---- */
+.stat-row { display: flex; justify-content: space-between; margin-bottom: 6px; }
+.stat-label { font-size: 11px; color: #6b7299; }
+.stat-value { font-size: 11px; color: #dcddde; font-weight: 600; }
+
+/* ---- Status Bar ---- */
+#status-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 28px; background: rgba(26,29,46,0.9); border-top: 1px solid #2a2d45; display: flex; align-items: center; padding: 0 12px; gap: 20px; font-size: 11px; color: #6b7299; pointer-events: none; z-index: 500; }
+#status-bar span { white-space: nowrap; }
+
+/* ---- Leaflet overrides ---- */
+.leaflet-container { background: #1a1d2e; cursor: crosshair; }
+.leaflet-control-zoom a { background: #1a1d2e !important; color: #dcddde !important; border-color: #2a2d45 !important; }
+.leaflet-control-zoom a:hover { background: #252840 !important; }
+.leaflet-control-attribution { background: rgba(26,29,46,0.8) !important; color: #6b7299 !important; font-size: 9px !important; }
+.leaflet-control-attribution a { color: #5865f2 !important; }
+
+/* ---- Vertex handles (one per polygon vertex) ---- */
+.vertex-handle { width: 12px !important; height: 12px !important; background: #fff; border: 2px solid #5865f2; border-radius: 50%; cursor: move; box-shadow: 0 0 4px rgba(0,0,0,0.6); margin-left: -6px !important; margin-top: -6px !important; }
+.vertex-handle:hover { background: #5865f2; transform: scale(1.4); }
+.leaflet-marker-icon.vertex-handle { transition: transform 0.1s, background 0.1s; }
+
+/* ---- Construction overlays ---- */
+.construction-overlay { position: absolute; pointer-events: none; }
+.construction-overlay svg { pointer-events: all; overflow: visible; }
+.construction-overlay svg:hover { filter: brightness(1.1); }
+
+/* ---- Placement preview ---- */
+.place-preview { stroke-dasharray: 6 4; animation: dash 0.5s linear infinite; }
+@keyframes dash { to { stroke-dashoffset: -10; } }
+
+/* ---- Toast ---- */
+#toast { position: fixed; bottom: 48px; left: 50%; transform: translateX(-50%); background: #252840; color: #dcddde; padding: 8px 18px; border-radius: 20px; font-size: 13px; border: 1px solid #3a3d5a; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 9999; white-space: nowrap; }
+#toast.show { opacity: 1; }
+#toast.warning { background: #3a2010; border-color: #c06020; color: #ffaa55; }
+
+/* ---- Lot shape buttons ---- */
+.shape-btn-row { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 4px; }
+.shape-btn { padding: 4px 10px; border: 1px solid #2a2d45; background: #12141c; color: #8b91b0; cursor: pointer; border-radius: 5px; font-size: 12px; font-family: inherit; transition: all 0.15s; line-height: 1.4; }
+.shape-btn:hover { border-color: #5865f2; color: #dcddde; background: #1e2038; }
+.shape-btn.active { background: #3a4080; border-color: #5865f2; color: #fff; font-weight: 600; }
+
+/* ---- Building ratio slider ---- */
+.ratio-slider { width: 100%; accent-color: #5865f2; cursor: pointer; margin-top: 2px; }
+
+/* ---- Scrollbar ---- */
+#sidebar::-webkit-scrollbar { width: 5px; }
+#sidebar::-webkit-scrollbar-track { background: #12141c; }
+#sidebar::-webkit-scrollbar-thumb { background: #2a2d45; border-radius: 3px; }
+
+/* ---- Placing / drawing cursor ---- */
+body.placing #map   { cursor: crosshair; }
+body.selecting #map { cursor: default; }
+
+/* ---- Draw hint bar ---- */
+#draw-hint {
+  position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+  background: rgba(26,29,46,0.92); border: 1px solid #5865f2;
+  color: #c8cbe8; font-size: 12px; padding: 6px 14px;
+  border-radius: 20px; pointer-events: none; z-index: 600;
+  white-space: nowrap; display: none;
+}
+#draw-hint.visible { display: block; }
